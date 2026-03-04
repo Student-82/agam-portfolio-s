@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Agam%20Pathak/OneDrive/Desktop/PROJECT/TMS/agam-portfolio-s/agam-portfolio-s/app/page.tsx"],"sourcesContent":["import Navbar from './Navbar';\r\nimport Hero from './Hero';\r\nimport Skills from './Skills';\r\nimport Projects from './Projects';\r\nimport Contact from './Contact';\r\nimport Footer from './Footer';\r\n\r\nconst App = () => {\r\n  return (\r\n    <div>\r\n      <Navbar />\r\n      <Hero />\r\n      <Skills />\r\n      <Projects />\r\n      <Contact />\r\n      <Footer />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default App;"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAOA,MAAM,MAAM;IACV,qBACE,8OAAC;;0BACC,8OAAC;;;;;0BACD,8OAAC;;;;;0BACD,8OAAC;;;;;0BACD,8OAAC;;;;;0BACD,8OAAC;;;;;0BACD,8OAAC;;;;;;;;;;;AAGP;uCAEe"}}]
-}
