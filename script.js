@@ -8,6 +8,8 @@ const contactStatus = document.getElementById("contact-status");
 const themeToggleButtons = document.querySelectorAll("[data-theme-toggle]");
 const THEME_STORAGE_KEY = "ap_portfolio_theme";
 const rootElement = document.documentElement;
+const introOverlay = document.getElementById("lux-intro");
+const introSkip = document.getElementById("intro-skip");
 
 function getSavedTheme() {
   try {
@@ -70,6 +72,42 @@ themeToggleButtons.forEach((button) => {
     setTheme(nextTheme);
   });
 });
+
+if (introOverlay) {
+  const reduceMotion =
+    "matchMedia" in window &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let introDismissed = false;
+
+  const dismissIntro = () => {
+    if (introDismissed) {
+      return;
+    }
+
+    introDismissed = true;
+    introOverlay.classList.add("is-leaving");
+    document.body.classList.remove("is-preloading");
+
+    window.setTimeout(() => {
+      introOverlay.remove();
+    }, 760);
+  };
+
+  if (introSkip instanceof HTMLButtonElement) {
+    introSkip.addEventListener("click", dismissIntro);
+  }
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      dismissIntro();
+    }
+  });
+
+  window.setTimeout(dismissIntro, reduceMotion ? 260 : 2400);
+  window.setTimeout(dismissIntro, 4200);
+} else {
+  document.body.classList.remove("is-preloading");
+}
 
 if (currentYear) {
   currentYear.textContent = String(new Date().getFullYear());

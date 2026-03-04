@@ -77,8 +77,139 @@ body {
   transition: background 0.35s ease, color 0.25s ease;
 }
 
+body.is-preloading {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
+}
+
+#lux-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 201, 128, 0.28), transparent 36%),
+    radial-gradient(circle at 82% 8%, rgba(118, 188, 255, 0.2), transparent 40%),
+    linear-gradient(145deg, #03060f 0%, #09172c 60%, #10254b 100%);
+}
+
+#lux-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 225, 179, 0.11) 46%, transparent 64%);
+  animation: introSweep 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.lux-shell {
+  position: relative;
+  width: min(560px, 92vw);
+  border-radius: 24px;
+  padding: 1.4rem 1.35rem 1.2rem;
+  border: 1px solid rgba(255, 214, 148, 0.35);
+  background:
+    linear-gradient(160deg, rgba(20, 36, 60, 0.92), rgba(10, 20, 36, 0.95)),
+    linear-gradient(120deg, rgba(255, 199, 112, 0.12), rgba(125, 186, 255, 0.1));
+  box-shadow:
+    0 30px 100px rgba(2, 8, 19, 0.7),
+    inset 0 0 0 1px rgba(255, 210, 140, 0.12);
+  text-align: center;
+  overflow: hidden;
+}
+
+.lux-shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 30%;
+  height: 100%;
+  transform: skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 233, 184, 0.26), transparent);
+  animation: introShimmer 2.2s ease-in-out infinite;
+}
+
+.lux-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  font-size: 0.72rem;
+  color: #f7d39a;
+  font-weight: 700;
+}
+
+.lux-mark {
+  width: 92px;
+  height: 92px;
+  margin: 0.7rem auto 0.85rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #07111f;
+  background: conic-gradient(from 25deg, #ffdca4, #7ec2ff, #8ff7d6, #ffdca4);
+  box-shadow:
+    0 0 0 8px rgba(255, 222, 163, 0.13),
+    0 10px 40px rgba(110, 162, 255, 0.42);
+  animation: introPulse 1.4s ease-in-out infinite;
+}
+
+.lux-title {
+  margin: 0;
+  font-size: clamp(1.55rem, 4vw, 2.2rem);
+  font-family: "Space Grotesk", sans-serif;
+  color: #eef5ff;
+}
+
+.lux-subtitle {
+  margin: 0.5rem auto 0;
+  max-width: 40ch;
+  color: #b8c8e6;
+}
+
+.lux-progress {
+  height: 6px;
+  border-radius: 999px;
+  margin: 1rem auto 0.95rem;
+  width: min(330px, 85%);
+  background: rgba(142, 175, 228, 0.22);
+  overflow: hidden;
+}
+
+.lux-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7ef2ce, #84bfff, #ffdaa4);
+  animation: introProgress 2.15s ease-out forwards;
+}
+
+#intro-skip {
+  border: 1px solid rgba(255, 214, 148, 0.45);
+  background: rgba(255, 214, 148, 0.08);
+  color: #fbe2bd;
+  font: inherit;
+  border-radius: 999px;
+  padding: 0.38rem 0.8rem;
+  cursor: pointer;
+}
+
+#intro-skip:hover {
+  background: rgba(255, 214, 148, 0.18);
+}
+
+#lux-intro.is-leaving {
+  animation: introFadeOut 0.7s ease forwards;
+  pointer-events: none;
 }
 
 .page-glow {
@@ -746,6 +877,55 @@ h2 {
   transform: none;
 }
 
+@keyframes introProgress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes introPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes introShimmer {
+  0% {
+    left: -35%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+@keyframes introSweep {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.78;
+  }
+}
+
+@keyframes introFadeOut {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--accent);
@@ -852,5 +1032,12 @@ button:focus-visible {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  #lux-intro::before,
+  .lux-shell::after,
+  .lux-mark,
+  .lux-progress span {
+    animation: none !important;
   }
 }

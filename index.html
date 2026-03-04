@@ -85,7 +85,29 @@
     }
   </script>
 </head>
-<body>
+<body class="is-preloading">
+  <noscript>
+    <style>
+      #lux-intro {
+        display: none !important;
+      }
+      body {
+        overflow: auto !important;
+      }
+    </style>
+  </noscript>
+
+  <div id="lux-intro" aria-label="Opening portfolio experience" role="status" aria-live="polite">
+    <div class="lux-shell">
+      <p class="lux-kicker">Curated Portfolio Experience</p>
+      <div class="lux-mark" aria-hidden="true">AP</div>
+      <h2 class="lux-title">Crafted With Precision</h2>
+      <p class="lux-subtitle">Loading selected projects, case studies, and impact highlights.</p>
+      <div class="lux-progress" aria-hidden="true"><span></span></div>
+      <button id="intro-skip" type="button">Skip Intro</button>
+    </div>
+  </div>
+
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-glow" aria-hidden="true"></div>
 
